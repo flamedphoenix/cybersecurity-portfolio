@@ -1,14 +1,5 @@
 # A1 - Security Concepts on Campus (UWA)
 
-## Physical Security
-
-| # | Concept | Location | Photo |
-|---|---------|----------|-------|
-| 1 | CCTV Cameras | [e.g. Reid Library entrance] | [photo] |
-| 2 | Access Control Doors | [e.g. computer labs] | [photo] |
-| 3 | Restricted Area Signage | [e.g. IT rooms] | [photo] |
-| 4 | Security Bollards | [e.g. building entrances] | [photo] |
-| 5 | Visitor Sign-in | [e.g. main reception] | [photo] |
 
 ## Digital Security
 
