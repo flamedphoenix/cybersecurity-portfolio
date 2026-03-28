@@ -1,8 +1,8 @@
 Commands:
-gpg --gen-key
-echo "secret mnessage" > secret.txt
-gpg --encrypt --armor --recipient 24252883@student.uwa.edu.au secret.txt
-gpg --decrypt secret.txt.asc
+#gpg --gen-key
+#echo "secret mnessage" > secret.txt
+#gpg --encrypt --armor --recipient 24252883@student.uwa.edu.au secret.txt
+#gpg --decrypt secret.txt.asc
 
 <img width="429" height="97" alt="Screenshot 2026-03-28 at 10 48 06 AM" src="https://github.com/user-attachments/assets/cedc0b8f-daac-480f-a6db-93dd25344c37" />
 
