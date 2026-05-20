@@ -1,0 +1,127 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+  .flyer { font-family: 'Space Grotesk', var(--font-sans); padding: 2rem 1.5rem; max-width: 640px; margin: 0 auto; }
+  .flyer-header { background: #1a1a2e; border-radius: 16px; padding: 2rem 1.5rem 1.5rem; margin-bottom: 1.25rem; }
+  .flyer-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7F77DD; font-weight: 500; margin-bottom: 0.5rem; }
+  .flyer-title { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 0.4rem; }
+  .flyer-title span { color: #AFA9EC; }
+  .flyer-sub { font-size: 14px; color: #888; line-height: 1.6; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .stat-card { background: #EEEDFE; border-radius: 12px; padding: 1rem; text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 700; color: #3C3489; line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 12px; color: #534AB7; line-height: 1.4; }
+  .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 500; margin-bottom: 0.75rem; }
+  .tips-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .tip-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1rem; }
+  .tip-icon { font-size: 20px; color: #534AB7; margin-bottom: 8px; }
+  .tip-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; line-height: 1.3; }
+  .tip-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+  .tip-card.danger { border-color: #F09595; }
+  .tip-card.danger .tip-icon { color: #A32D2D; }
+  .tip-card.success { border-color: #97C459; }
+  .tip-card.success .tip-icon { color: #3B6D11; }
+  .tip-card.warning { border-color: #EF9F27; }
+  .tip-card.warning .tip-icon { color: #854F0B; }
+  .tip-card.info { border-color: #85B7EB; }
+  .tip-card.info .tip-icon { color: #185FA5; }
+  .red-flags { background: #FCEBEB; border: 0.5px solid #F09595; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .red-flags-title { font-size: 13px; font-weight: 500; color: #791F1F; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+  .red-flags-title i { font-size: 16px; }
+  .flag-list { display: flex; flex-direction: column; gap: 6px; }
+  .flag-item { font-size: 13px; color: #A32D2D; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .flag-item i { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .checklist { background: #EAF3DE; border: 0.5px solid #97C459; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .checklist-title { font-size: 13px; font-weight: 500; color: #27500A; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+  .check-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px; }
+  .check-item { font-size: 13px; color: #3B6D11; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .check-item i { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .footer-bar { background: #1a1a2e; border-radius: 12px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-text { font-size: 12px; color: #666; }
+  .footer-url { font-size: 12px; color: #7F77DD; font-weight: 500; }
+</style>
+
+<div class="flyer">
+  <div class="flyer-header">
+    <div class="flyer-tag">Cyber safety — for high school students</div>
+    <div class="flyer-title">Stay safe<br><span>online.</span></div>
+    <div class="flyer-sub" style="margin-top:0.75rem;">Your digital life is real life. Hackers, scammers, and identity thieves target young people specifically — here's what you need to know.</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num">1 in 3</div>
+      <div class="stat-label">teens have experienced cyberbullying or online harassment</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">83%</div>
+      <div class="stat-label">of data breaches involve stolen or weak passwords</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">$1B+</div>
+      <div class="stat-label">lost to social media scams annually in the US alone</div>
+    </div>
+  </div>
+
+  <div class="section-label">5 things to do right now</div>
+  <div class="tips-grid">
+    <div class="tip-card success">
+      <div class="tip-icon"><i class="ti ti-lock" aria-hidden="true"></i></div>
+      <div class="tip-title">Use a password manager</div>
+      <div class="tip-body">One strong unique password per account. Never reuse passwords — if one site leaks, attackers try it everywhere.</div>
+    </div>
+    <div class="tip-card info">
+      <div class="tip-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+      <div class="tip-title">Turn on 2-step verification</div>
+      <div class="tip-body">Even if someone steals your password, they still can't get in without your phone. Enable it on email, Instagram, TikTok.</div>
+    </div>
+    <div class="tip-card warning">
+      <div class="tip-icon"><i class="ti ti-eye-off" aria-hidden="true"></i></div>
+      <div class="tip-title">Check your privacy settings</div>
+      <div class="tip-body">Set Instagram, Snapchat, and TikTok to private. Strangers don't need to see your location, school, or daily routine.</div>
+    </div>
+    <div class="tip-card success">
+      <div class="tip-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+      <div class="tip-title">Keep your apps updated</div>
+      <div class="tip-body">Updates fix security holes. An unpatched app is an open door. Turn on automatic updates on your phone.</div>
+    </div>
+    <div class="tip-card info">
+      <div class="tip-icon"><i class="ti ti-wifi-off" aria-hidden="true"></i></div>
+      <div class="tip-title">Be careful on public Wi-Fi</div>
+      <div class="tip-body">Public networks at shopping centres or cafés can be monitored. Avoid logging into banking or email on them.</div>
+    </div>
+    <div class="tip-card warning">
+      <div class="tip-icon"><i class="ti ti-user-check" aria-hidden="true"></i></div>
+      <div class="tip-title">Think before you post</div>
+      <div class="tip-body">Photos can reveal your location, school uniform, or home address. Screenshots last forever — even after you delete.</div>
+    </div>
+  </div>
+
+  <div class="red-flags">
+    <div class="red-flags-title"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Red flags — stop and think</div>
+    <div class="flag-list">
+      <div class="flag-item"><i class="ti ti-x" aria-hidden="true"></i>"You've won a prize — click here to claim it" — this is almost always a scam.</div>
+      <div class="flag-item"><i class="ti ti-x" aria-hidden="true"></i>Someone you've only met online asks for photos, money, or to keep your chat secret.</div>
+      <div class="flag-item"><i class="ti ti-x" aria-hidden="true"></i>A message that creates urgency — "act now or your account will be deleted."</div>
+      <div class="flag-item"><i class="ti ti-x" aria-hidden="true"></i>A link that looks almost right but is slightly off — paypa1.com, g00gle.com.</div>
+      <div class="flag-item"><i class="ti ti-x" aria-hidden="true"></i>Someone asks for your password — no legitimate service ever needs it.</div>
+    </div>
+  </div>
+
+  <div class="checklist">
+    <div class="checklist-title"><i class="ti ti-circle-check" aria-hidden="true"></i> Quick security checklist</div>
+    <div class="check-list">
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>Password manager installed</div>
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>2FA on email and social media</div>
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>Social accounts set to private</div>
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>Phone has a PIN or Face ID</div>
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>Auto-updates turned on</div>
+      <div class="check-item"><i class="ti ti-check" aria-hidden="true"></i>Know who to talk to if something goes wrong</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-text">If something feels wrong online, tell a trusted adult or report it.</div>
+    <div class="footer-url">esafety.gov.au</div>
+  </div>
+</div>
