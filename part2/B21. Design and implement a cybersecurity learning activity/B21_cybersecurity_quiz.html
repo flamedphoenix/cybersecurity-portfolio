@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Knowledge Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface2: #1e2333;
+    --border: #2a3045;
+    --border2: #3a4460;
+    --text: #e8eaf0;
+    --text2: #8b93a8;
+    --text3: #555f78;
+    --accent: #4f8ef7;
+    --accent2: #2d5cc7;
+    --success: #2eb87a;
+    --success-bg: #0d2e1e;
+    --success-border: #1a5c3a;
+    --danger: #e85555;
+    --danger-bg: #2e0d0d;
+    --danger-border: #5c1a1a;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .progress-track {
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    margin-bottom: 2rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .q-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .q-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  .q-category {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(79, 142, 247, 0.08);
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+  }
+
+  .q-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .option-btn {
+    text-align: left;
+    padding: 13px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--border2);
+    background: var(--surface2);
+  }
+
+  .option-letter {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .option-btn.correct {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+  }
+  .option-btn.correct .option-letter { color: var(--success); }
+
+  .option-btn.wrong {
+    background: var(--danger-bg);
+    border-color: var(--danger-border);
+    color: var(--danger);
+  }
+  .option-btn.wrong .option-letter { color: var(--danger); }
+
+  .option-btn.reveal {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+    opacity: 0.6;
+  }
+
+  .explanation {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .explanation strong { color: var(--text); font-weight: 500; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .next-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .next-btn:hover { background: var(--accent2); }
+  .next-btn:active { transform: scale(0.99); }
+
+  .results { animation: fadeIn 0.3s ease; }
+
+  .score-header {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+  }
+
+  .score-display {
+    font-family: var(--mono);
+    font-size: 64px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .score-denom {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+
+  .score-msg {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .score-sub {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 2rem;
+  }
+
+  .breakdown-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 2rem;
+  }
+
+  .breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  .breakdown-item.pass { border-left: 2px solid var(--success); }
+  .breakdown-item.fail { border-left: 2px solid var(--danger); }
+
+  .bd-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .bd-cat {
+    color: var(--text2);
+    flex: 1;
+  }
+
+  .bd-status {
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .pass .bd-status { color: var(--success); }
+  .fail .bd-status { color: var(--danger); }
+
+  .restart-btn {
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .restart-btn:hover { background: var(--surface2); border-color: var(--text3); }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-tag">B21 — Cybersecurity Learning Activity</div>
+    <h1>Cybersecurity Knowledge Quiz</h1>
+    <p class="header-sub">10 questions covering passwords, phishing, encryption, authentication, and more. Each answer includes a detailed explanation.</p>
+  </header>
+
+  <div id="quiz"></div>
+
+  <footer>
+    <span>CITS2006 Portfolio</span>
+    <span>10 questions · ~5 min</span>
+  </footer>
+</div>
+
+<script>
+const questions = [
+  {
+    category: "Passwords",
+    q: "Which of the following is the strongest password?",
+    options: ["Password123!", "p@ssw0rd", "correct-horse-battery-staple", "Tr0ub4dor&3"],
+    answer: 2,
+    explanation: "<strong>Long passphrases beat complex short passwords.</strong> 'correct-horse-battery-staple' has ~44 bits of entropy. Length matters more than complexity — every extra character multiplies the brute-force search space exponentially."
+  },
+  {
+    category: "Phishing",
+    q: "You receive an urgent email from 'support@paypa1.com' asking you to verify your account. What should you do?",
+    options: ["Click the link and log in quickly", "Forward it to friends as a warning", "Check the sender domain — 'paypa1' uses the digit 1, not the letter l", "Reply asking if it's legitimate"],
+    answer: 2,
+    explanation: "<strong>Homograph attacks replace letters with visually similar characters.</strong> 'paypa1.com' uses the digit 1 instead of the letter l. Always inspect the full sender domain before clicking links or entering credentials."
+  },
+  {
+    category: "Encryption",
+    q: "What does end-to-end encryption (E2EE) guarantee?",
+    options: ["Messages are encrypted on the server", "Only the sender and recipient can read the message", "The app provider can access messages if legally required", "Messages are protected from device compromise"],
+    answer: 1,
+    explanation: "<strong>E2EE means only the endpoints hold the keys.</strong> Even the service provider cannot decrypt messages. Note: E2EE does not protect against device compromise — only the transmission between devices."
+  },
+  {
+    category: "Social engineering",
+    q: "An attacker calls pretending to be IT support and asks for your password to fix an urgent issue. This is called:",
+    options: ["Phishing", "Pretexting", "Baiting", "Tailgating"],
+    answer: 1,
+    explanation: "<strong>Pretexting involves fabricating a scenario to manipulate a target.</strong> Legitimate IT staff will never ask for your password. Always verify caller identity through official channels before sharing any credentials."
+  },
+  {
+    category: "Network security",
+    q: "You connect to 'CafeWifi_Free' at a café. What is the primary risk?",
+    options: ["Slower internet speeds", "A man-in-the-middle attack intercepting your traffic", "Your battery draining faster", "The café tracking your location"],
+    answer: 1,
+    explanation: "<strong>Unencrypted or rogue Wi-Fi networks enable man-in-the-middle (MitM) attacks.</strong> An attacker can intercept, read, or modify your traffic. Use a VPN on public networks and verify sites use HTTPS."
+  },
+  {
+    category: "Malware",
+    q: "Ransomware attacks typically end with the attacker:",
+    options: ["Deleting all your files permanently", "Selling your files on the dark web", "Encrypting your files and demanding payment for the key", "Sending spam emails from your account"],
+    answer: 2,
+    explanation: "<strong>Ransomware encrypts victim files and demands a ransom for the decryption key.</strong> Regular offline backups are the most effective defence — if you have a clean backup, you can restore without paying."
+  },
+  {
+    category: "Authentication",
+    q: "Which MFA method is most resistant to phishing attacks?",
+    options: ["SMS one-time codes", "Email verification links", "Hardware security keys (FIDO2/WebAuthn)", "Authenticator app TOTP codes"],
+    answer: 2,
+    explanation: "<strong>Hardware security keys are phishing-resistant by design.</strong> FIDO2/WebAuthn keys cryptographically bind authentication to the legitimate domain — a fake site cannot intercept or replay the response, unlike SMS or TOTP codes."
+  },
+  {
+    category: "Privacy",
+    q: "What does a VPN primarily protect you from?",
+    options: ["Malware and viruses", "Your ISP and local network observers seeing your traffic", "Websites tracking you with cookies", "Hackers directly accessing your device"],
+    answer: 1,
+    explanation: "<strong>A VPN encrypts traffic between your device and the VPN server</strong>, hiding it from your ISP and local observers. It does not block cookies, prevent malware, or secure your device — and the VPN provider itself can see your traffic."
+  },
+  {
+    category: "Web security",
+    q: "A website URL starts with 'https://'. What does this confirm?",
+    options: ["The website is legitimate and trustworthy", "The connection between your browser and the server is encrypted", "The website has been verified by the government", "Your data is stored securely on their servers"],
+    answer: 1,
+    explanation: "<strong>HTTPS only confirms the connection is encrypted via TLS — not that the site is trustworthy.</strong> Attackers regularly run phishing sites with valid HTTPS certificates. Always verify the domain, not just the padlock."
+  },
+  {
+    category: "Access control",
+    q: "The principle of least privilege means:",
+    options: ["Administrators should have fewer passwords", "Users and systems are given only the minimum access needed for their role", "Sensitive files should be deleted after use", "All staff should share a single login for efficiency"],
+    answer: 1,
+    explanation: "<strong>Least privilege limits the blast radius of a breach.</strong> If an account is compromised, attackers can only access what that account was permitted to reach. It is a foundational principle of Zero Trust Architecture."
+  }
+];
+
+const letters = ['A', 'B', 'C', 'D'];
+let current = 0, score = 0, answered = false, results = [];
+
+function render() {
+  const el = document.getElementById('quiz');
+  if (current >= questions.length) { renderResults(el); return; }
+  const q = questions[current];
+  const pct = (current / questions.length) * 100;
+  el.innerHTML = `
+    <div class="progress-row">
+      <span class="progress-label">${current + 1} / ${questions.length}</span>
+      <span class="progress-label">${score} correct</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="pf" style="width:0%"></div></div>
+    <div class="q-meta-row">
+      <span class="q-num">Question ${current + 1}</span>
+      <span class="q-category">${q.category}</span>
+    </div>
+    <div class="q-text">${q.q}</div>
+    <div class="options">
+      ${q.options.map((o, i) => `
+        <button class="option-btn" onclick="select(${i})">
+          <span class="option-letter">${letters[i]}</span>
+          <span>${o}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="feedback"></div>
+  `;
+  requestAnimationFrame(() => {
+    const pf = document.getElementById('pf');
+    if (pf) pf.style.width = pct + '%';
+  });
+}
+
+function select(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const correct = idx === q.answer;
+  if (correct) score++;
+  results.push({ correct, category: q.category });
+  document.querySelectorAll('.option-btn').forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.answer && correct) b.classList.add('correct');
+    else if (i === idx && !correct) b.classList.add('wrong');
+    else if (i === q.answer && !correct) b.classList.add('reveal');
+  });
+  document.getElementById('feedback').innerHTML = `
+    <div class="explanation">${q.explanation}</div>
+    <button class="next-btn" onclick="next()">${current + 1 < questions.length ? 'Next question →' : 'See results →'}</button>
+  `;
+}
+
+function next() { current++; answered = false; render(); }
+
+function renderResults(el) {
+  const pct = Math.round((score / questions.length) * 100);
+  let msg, sub;
+  if (pct >= 90) { msg = "Outstanding!"; sub = "You have a strong grasp of cybersecurity fundamentals."; }
+  else if (pct >= 70) { msg = "Good work."; sub = "Solid understanding with a few areas to review."; }
+  else if (pct >= 50) { msg = "Getting there."; sub = "Review the explanations above to strengthen your knowledge."; }
+  else { msg = "Keep learning."; sub = "Cybersecurity takes practice — try again after reviewing the concepts."; }
+
+  el.innerHTML = `
+    <div class="results">
+      <div class="score-header">
+        <div class="score-display">${score}/${questions.length}</div>
+        <div class="score-denom">${pct}% correct</div>
+        <div class="score-msg">${msg}</div>
+        <div class="score-sub">${sub}</div>
+      </div>
+      <div class="breakdown-title">Result breakdown</div>
+      <div class="breakdown">
+        ${results.map((r, i) => `
+          <div class="breakdown-item ${r.correct ? 'pass' : 'fail'}">
+            <span class="bd-num">Q${i + 1}</span>
+            <span class="bd-cat">${questions[i].category}</span>
+            <span class="bd-status">${r.correct ? '✓ correct' : '✗ incorrect'}</span>
+          </div>
+        `).join('')}
+      </div>
+      <button class="restart-btn" onclick="restart()">Try again</button>
+    </div>
+  `;
+}
+
+function restart() { current = 0; score = 0; answered = false; results = []; render(); }
+render();
+</script>
+</body>
+</html>
